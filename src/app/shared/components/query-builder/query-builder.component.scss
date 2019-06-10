@@ -1,0 +1,32 @@
+@import '../../../../scss/listStyles.scss';
+@import '../../../../scss/search.scss';
+
+.is-loading ::ng-deep .mat-option-text {
+  display: flex;
+  justify-content: center;
+}
+
+.is-save-loading {
+  margin: auto;
+  padding-top: 5%;
+}
+
+.current-query-builder ::ng-deep {
+  .mat-form-field-appearance-legacy .mat-form-field-label {
+    color: $medium2;
+  }
+
+  .mat-form-field-label {
+    line-height: 2;
+  }
+}
+
+@media all and (-ms-high-contrast: none) {
+  .mat-table tr {
+    height: 65px;
+  }
+}
+
+.query-builder-input {
+  display: none !important;
+}

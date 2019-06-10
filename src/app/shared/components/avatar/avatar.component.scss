@@ -1,0 +1,24 @@
+@import "../../../../scss/variables.scss";
+
+.avathar_container {
+    width: 25%;
+    float: left;
+    .avatar {
+      position: relative;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .avatar-innercircle {
+      background: $green;
+      width: 25%;
+      height: 25%;
+      border-radius: 10px;
+      position: absolute;
+      bottom: 2%;
+      right: 2%;
+      border: 1px solid $white;
+    }
+}

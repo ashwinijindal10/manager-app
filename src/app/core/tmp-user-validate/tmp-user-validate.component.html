@@ -1,0 +1,14 @@
+<div class="user-validate-form" fxLayout="row">
+  <form fxLayout="column">
+    <mat-form-field fxFlex="100">
+      <input matInput placeholder="User Email" name="userEmail" value="" [(ngModel)]="userEmail" required />
+    </mat-form-field>
+    <div *ngIf="showError" class="error">{{ error }}</div>
+  </form>
+  <div fxFlex="100" fxLayoutAlign="space-between">
+    <button mat-raised-button color="primary" (click)="validateUser()">
+      Validate User
+    </button>
+    <button mat-raised-button color="primary" (click)="cancel()">cancel</button>
+  </div>
+</div>

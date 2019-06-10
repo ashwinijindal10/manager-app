@@ -1,0 +1,19 @@
+<mat-card fxFlex="100" fxLayout="column" class="card-section-zoom template-popup">
+  <div class="img-content">
+    <img mat-card-image [src]="data.template?.htmlThumbnail" alt="Template design">
+  </div>
+  <mat-card-content>
+    <h6 [matBadge]="data.template?.category.charAt(0)" matBadgePosition="after">{{data.template?.name}}</h6>
+    <p>Created by {{data.template?.createdBy}}</p>
+  </mat-card-content>
+  <div class="mt-15" fxLayout="row" fxLayoutAlign="end end">
+    <div fxLayout="row" fxFlex="80">
+      <button type="button" class="btn-edit" mat-stroked-button (click)="performAction('BACK')">BACK TO EDIT</button>
+      <button *ngIf="data.changeTemplate" type="button" class="btn-edit" mat-stroked-button
+        (click)="performAction('CHANGE')">CHANGE TEMPLATE</button>
+    </div>
+    <div fxLayout="row" fxFlex="20" fxLayoutAlign="end end">
+      <button type="button" mat-flat-button (click)="performAction(data.actionText)">{{data.actionText}}</button>
+    </div>
+  </div>
+</mat-card>

@@ -1,0 +1,67 @@
+@import "../../../../scss/variables.scss";
+
+.email-popup {
+  max-height: 90vh;
+  min-height: 0vh;
+  overflow: auto;
+  position: fixed;
+  bottom: 5px;
+  z-index: 999;
+  right: 16px;
+  background: $white;
+  -webkit-box-shadow: 0 -5px 20px rgba(0, 0, 0, .2);
+  -moz-box-shadow: 0 -5px 20px rgba(0, 0, 0, .2);
+  box-shadow: 0 -5px 20px rgba(0, 0, 0, .2);
+
+  .dialog-header {
+    padding: 0 5px;
+  }
+
+  .form-container {
+    padding: 24px;
+    .btn-row {
+      .nav-btn {
+        margin: 0;
+        &.save-btn{
+          margin: 0 20px 0 0;
+        }
+      }
+    }
+
+    .mat-chip-list {
+      padding: 0;
+      margin-left: 0;
+
+      /deep/.mat-chip-list-wrapper {
+        max-height: 74px;
+        overflow: auto;
+        -ms-overflow-style: auto;
+        scrollbar-face-color: $lite !important;
+        &::-webkit-scrollbar {
+          display: block;
+        }
+        scrollbar-color: $lite $white;
+      }
+
+      .mat-chip-remove {
+        color: $dark;
+        top: 0;
+        width: 16px;
+        height: 16px;
+        margin-left: 5px;
+      }
+
+      .mat-chip.mat-standard-chip {
+        background-color: $body-color;
+        color: $dark;
+        border-radius: 15px;
+        text-transform: capitalize;
+        min-height: 28px;
+        min-width: 50px;
+        padding: 10px;
+        font-size: 14px;
+        margin: 4px;
+      }
+    }
+  }
+}

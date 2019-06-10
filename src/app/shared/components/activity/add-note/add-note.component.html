@@ -1,0 +1,19 @@
+<div class="add-note">
+  <mat-icon class="x-btn-close" matTooltip="close" svgIcon="close" (click)="close()"></mat-icon>
+  <div fxLayout="column">
+    <div class="add-notes-wrapper">
+      <h4 class="add-notes-title">Add Notes <span>(optional)</span></h4>
+      <div class="add-notes-sub-title">{{notesApply}} </div>
+      <textarea #notes [(ngModel)]="note" aria-label="Text Area" class="add-notes-text" maxlength="4000" rows="15"
+        placeholder="Start writing..."></textarea>
+      <div>
+        <div class="characters-remaining medium2">{{notes.value.length}}/4,000</div>
+        <div class="character-limit medium2">Character Limit : 4,000</div>
+      </div>
+    </div>
+    <div fxLayout="row" fxFlex="100" class="flex-basis" fxLayoutAlign="end center">
+      <button mat-raised-button mat-dialog-close (click)="close()" class="prospect-button">CANCEL</button>
+      <button mat-raised-button [disabled]="note.length==0" (click)="addNote()" color="primary">ADD NOTE</button>
+    </div>
+  </div>
+</div>

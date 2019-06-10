@@ -1,0 +1,70 @@
+<mat-toolbar>
+  <mat-icon svgIcon="humburger_2" (click)="showFiller = !showFiller"></mat-icon>
+</mat-toolbar>
+<mat-nav-list>
+  <a routerLinkActive="active active-link" aria-label="Dashboard" routerLink="/dashboard" mat-list-item href="#">
+    <mat-icon svgIcon="dashbord" matTooltip="Dashboard"></mat-icon> <span *ngIf="showFiller">Dashboard</span>
+  </a>
+  <a routerLinkActive="active active-link" aria-label="Prospects" routerLink="/prospect" mat-list-item href="#">
+    <mat-icon svgIcon="candidates" matTooltip="Prospects"></mat-icon> <span *ngIf="showFiller">Prospects List</span>
+  </a>
+  <a routerLinkActive="active active-link" aria-label="Jobs" routerLink="/jobs" mat-list-item href="#">
+    <mat-icon svgIcon="briefcase" matTooltip="Jobs"></mat-icon> <span *ngIf="showFiller">Jobs</span>
+  </a>
+  <a routerLinkActive="active active-link" aria-label="Campaign" routerLink="/campaign" mat-list-item href="#">
+    <mat-icon svgIcon="announcement" matTooltip="Campaign"></mat-icon> <span *ngIf="showFiller">Campaign</span>
+  </a>
+  <a routerLinkActive="active active-link" aria-label="Message" routerLink="/message" mat-list-item href="#">
+    <mat-icon svgIcon="email" matTooltip="Message"></mat-icon> <span *ngIf="showFiller">Message</span>
+  </a>
+  <!--<a routerLinkActive="active" routerLink="/templates" mat-list-item href="#">
+    <mat-icon svgIcon="piechart"></mat-icon> <span *ngIf="showFiller">Templates</span>
+  </a>-->
+  <a routerLinkActive="active" mat-list-item>
+    <mat-icon svgIcon="more_h"></mat-icon> <span *ngIf="showFiller">More</span>
+  </a>
+  <!-- <a routerLinkActive="active" routerLink="/campaign" mat-list-item href="#">3 <span *ngIf="showFiller">Campaign</span></a>
+  <a routerLinkActive="active" routerLink="/templates" mat-list-item href="#">3 <span *ngIf="showFiller">Templates</span></a> -->
+</mat-nav-list>
+
+<!--<div class="sidenav">
+  <a routerLinkActive="active" routerLink="/dashboard">
+    <mat-list-item>DASHBOARD</mat-list-item>
+  </a>
+  <a routerLinkActive="active" routerLink="/prospect">
+    <mat-list-item>PROSPECTS</mat-list-item>
+  </a>
+  <a routerLinkActive="active" routerLink="/bulkupload">
+    <mat-list-item>BULK UPLOAD</mat-list-item>
+  </a>
+  <a routerLinkActive="active" routerLink="/importlist">
+    <mat-list-item>PREVIOUS IMPORTS</mat-list-item>
+  </a>
+  <a routerLinkActive="active" routerLink="/campaign">
+    <mat-list-item>CAMPAIGN</mat-list-item>
+  </a>
+   <a routerLinkActive="active" routerLink="/templates">
+    <mat-list-item>TEMPLATES</mat-list-item>
+  </a>
+  <a routerLinkActive="active" routerLink="/prospect">
+    <mat-list-item>JOBS</mat-list-item>
+  </a>
+  <a routerLinkActive="active" routerLink="/prospect">
+    <mat-list-item>CAMPAIGN</mat-list-item>
+  </a>
+  <a routerLinkActive="active" routerLink="/prospect">
+    <mat-list-item>OTHER</mat-list-item>
+  </a>
+  <a routerLinkActive="active" routerLink="/prospect">
+    <mat-list-item>NOTIFICATIONS</mat-list-item>
+  </a>
+  <a routerLinkActive="active" routerLink="/prospect">
+    <mat-list-item>EMAILS</mat-list-item>
+  </a>
+  <a routerLinkActive="active" routerLink="/prospect">
+    <mat-list-item>CALENDAR</mat-list-item>
+  </a>
+  <a routerLinkActive="active" routerLink="/prospect">
+    <mat-list-item>HELP</mat-list-item>
+  </a>
+</div>-->

@@ -1,0 +1,17 @@
+<div class="create-emaillist" fxFlexAlign="end" fxLayout="row" dir="rtl">
+  <div fxflex="auto" dir="ltr" class="create-emaillist-inner" *ngIf="showEmailEditor3">
+    <app-email-editor-modal-dialog (closeEmail)="closeEmail($event)" [emailEditorInstanceId]="emailEditorInstanceName3"
+      [emailEditorInput]="emailEditorInput3" [displayName]="emailEditorInstanceDisplayName3">
+    </app-email-editor-modal-dialog>
+  </div>
+  <div fxflex="auto" dir="ltr" class="create-emaillist-inner" *ngIf="showEmailEditor2">
+    <app-email-editor-modal-dialog (closeEmail)="closeEmail($event)" [emailEditorInstanceId]="emailEditorInstanceName2"
+      [emailEditorInput]="emailEditorInput2" [displayName]="emailEditorInstanceDisplayName2">
+    </app-email-editor-modal-dialog>
+  </div>
+  <div fxflex="auto" dir="ltr" class="create-emaillist-inner" *ngIf="showEmailEditor1">
+    <app-email-editor-modal-dialog (closeEmail)="closeEmail($event)" [emailEditorInstanceId]="emailEditorInstanceName1"
+      [emailEditorInput]="emailEditorInput1" [displayName]="emailEditorInstanceDisplayName1">
+    </app-email-editor-modal-dialog>
+  </div>
+</div>

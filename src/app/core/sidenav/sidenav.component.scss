@@ -1,0 +1,36 @@
+@import "../../../scss/variables.scss";
+.mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: $white;
+  height: 50px;
+  border-top: 3px solid $primary-color;
+  padding: 0 8px;
+}
+.mat-nav-list {
+  .mat-list-item {
+    color: $white;
+    &.active-link, &:hover{
+      background: $white;
+      color: $primary-color;
+    }
+    span {
+      padding: 0 5px;
+    }
+  }
+}
+/deep/ .mat-list-base {
+  &.mat-nav-list {
+    padding-top:35px;
+  }
+  .mat-list-item .mat-list-item-content,
+  .mat-list-option .mat-list-item-content {
+    padding: 0 8px !important;
+  }
+}
+  
+.white-icon svg {
+  fill: $white;
+}
+

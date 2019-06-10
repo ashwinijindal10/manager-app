@@ -1,0 +1,20 @@
+@import "../../../scss/variables.scss";
+.mat-toolbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 3;
+    background: $white;
+    height: 50px;
+    border-top: 3px solid $primary-color;
+    -webkit-box-shadow:0 -5px 20px $black;
+   -moz-box-shadow:0 -5px 20px $black;
+   box-shadow:0 -5px 20px $black;
+  }
+  .toolbar-icon {
+    text-align: right;
+    width: 100%;
+    .mat-icon {
+      padding:10px 5px;
+    }
+  }

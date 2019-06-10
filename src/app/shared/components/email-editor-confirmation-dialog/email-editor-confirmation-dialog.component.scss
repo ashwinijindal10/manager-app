@@ -1,0 +1,39 @@
+@import "../../../../scss/variables.scss";
+
+.background-overlay {
+  width: 600px;
+  height: 180px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 99999;
+  padding: 20px;
+
+  &:after {
+    position: fixed;
+    top: 0;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: rgba($color: $black, $alpha: .5);
+    z-index: 0;
+  }
+
+  .popup-inner {
+    width: 100%;
+    height: 100%;
+    background: $white;
+    border-radius: 5px;
+    position: relative;
+    z-index: 1;
+    padding: 24px;
+
+    button.nav-btn {
+      margin: 24px 12px;
+    }
+  }
+}

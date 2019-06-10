@@ -1,0 +1,106 @@
+<div class="template-search-icon" fxLayout="row" fxLayoutAlign="end start">
+  <mat-icon> search</mat-icon>
+</div>
+<mat-tab-group class="select-template" animationDuration="0ms" (selectedTabChange)="callFromCategory($event)">
+  <ng-container *ngFor="let availableTypes of availableTemplateTypes">
+    <mat-tab label="{{availableTypes.value}}" *ngIf="availableTypes.code !== myTemplatesCode">
+      <ul class="filter" fxLayout="row" fxLayoutAlign="start center">
+        <li *ngFor="let availableCategory of availableTemplateCategory"
+          [ngClass]="availableTypes.selectedCategory === availableCategory.code ? 'active' : ''"
+          (click)="showTemplateList(availableTypes, availableCategory)">{{availableCategory.value}}</li>
+      </ul>
+      <h3 class="template-heading">All ({{alltemplateList?.totalCount}})</h3>
+      <div #sliderWrapper fxFlex="100%" fxLayout="row">
+        <div *ngIf="alltemplateList?.allTemplates.length > 0" ng2-carouselamos class="slides-wrapper"
+          [items]="alltemplateList?.allTemplates" [width]="allTemplateCarouselWidth" [$prev]="prev" [$next]="next"
+          [$item]="item" (onSelectedItem)="selectedItem = $event.item; selectedIndex = $event.index">
+        </div>
+        <ng-template #prev>
+          <mat-icon svgIcon="chevron-left" class="cursor icon-white"></mat-icon>
+        </ng-template>
+        <ng-template #next>
+          <mat-icon svgIcon="chevron-right" class="cursor icon-white"></mat-icon>
+        </ng-template>
+        <ng-template #item let-item let-i="index">
+          <ng-container>
+            <app-template-content [showCreate]="!item.id" [template]="item" [actionText]="actionText"
+              (action)="performAction($event)"></app-template-content>
+          </ng-container>
+        </ng-template>
+      </div>
+      <h3 class="template-heading">Recently Used Templates ({{alltemplateList?.recentlyUsedCount}})</h3>
+      <div fxFlex="100%" fxLayout="row">
+        <div *ngIf="alltemplateList?.recentlyUsedTemplates.length > 0" ng2-carouselamos class="slides-wrapper"
+          [items]="alltemplateList?.recentlyUsedTemplates" [width]="allTemplateCarouselWidth" [$prev]="prev1"
+          [$next]="next1" [$item]="item1" (onSelectedItem)="selectedItem = $event.item; selectedIndex = $event.index">
+        </div>
+        <ng-template #prev1>
+          <mat-icon svgIcon="chevron-left" class="cursor icon-white"></mat-icon>
+        </ng-template>
+        <ng-template #next1>
+          <mat-icon svgIcon="chevron-right" class="cursor icon-white"></mat-icon>
+        </ng-template>
+        <ng-template #item1 let-item let-i="index">
+          <ng-container>
+            <app-template-content [template]="item" [actionText]="actionText" (action)="performAction($event)">
+            </app-template-content>
+          </ng-container>
+        </ng-template>
+      </div>
+      <h3 class="template-heading">Most Popular Templates ({{alltemplateList?.mostWideCount}})</h3>
+      <div fxFlex="100%" fxLayout="row">
+        <div *ngIf="alltemplateList?.mostWidelyUsedTemplates.length > 0" ng2-carouselamos class="slides-wrapper"
+          [items]="alltemplateList?.mostWidelyUsedTemplates" [width]="allTemplateCarouselWidth" [$prev]="prev3"
+          [$next]="next3" [$item]="item3" (onSelectedItem)="selectedItem = $event.item; selectedIndex = $event.index">
+        </div>
+        <ng-template #prev3>
+          <mat-icon svgIcon="chevron-left" class="cursor icon-white"></mat-icon>
+        </ng-template>
+        <ng-template #next3>
+          <mat-icon svgIcon="chevron-right" class="cursor icon-white"></mat-icon>
+        </ng-template>
+        <ng-template #item3 let-item let-i="index">
+          <ng-container>
+            <app-template-content [template]="item" [actionText]="actionText" (action)="performAction($event)">
+            </app-template-content>
+          </ng-container>
+        </ng-template>
+      </div>
+    </mat-tab>
+    <mat-tab *ngIf="showCreate && availableTypes.code === myTemplatesCode" label="{{availableTypes.value}}">
+      <ul class="filter" fxLayout="row" fxLayoutAlign="start center">
+        <li *ngFor="let availableCategory of availableTemplateCategory"
+          [ngClass]="availableTypes.selectedCategory === availableCategory.code ? 'active' : ''"
+          (click)="showTemplateList(availableTypes, availableCategory)">{{availableCategory.value}}</li>
+      </ul>
+      <mat-tab-group class="select-template-inner" animationDuration="0ms">
+        <mat-tab *ngFor="let myTemplateTypes of availableMyTemplateTypes"
+          label="{{myTemplateTypes.value}}({{myTemplateList[myTemplateTypes?.code]?.length}})">
+          <div fxFlex="100%" fxLayout="row">
+            <ng-container *ngIf="myTemplateVisited">
+              <ng-container>
+                <div *ngIf="myTemplateList[myTemplateTypes.code].length > 0" ng2-carouselamos class="slides-wrapper"
+                  [items]="myTemplateList[myTemplateTypes.code]" [width]="allTemplateCarouselWidth" [$prev]="prev1"
+                  [$next]="next1" [$item]="item1"
+                  (onSelectedItem)="selectedItem = $event.item; selectedIndex = $event.index">
+                </div>
+                <ng-template #prev1>
+                  <mat-icon svgIcon="chevron-left" class="cursor icon-white"></mat-icon>
+                </ng-template>
+                <ng-template #next1>
+                  <mat-icon svgIcon="chevron-right" class="cursor icon-white"></mat-icon>
+                </ng-template>
+                <ng-template #item1 let-item let-i="index">
+                  <ng-container>
+                    <app-template-content [template]="item" [actionText]="actionText" (action)="performAction($event)">
+                    </app-template-content>
+                  </ng-container>
+                </ng-template>
+              </ng-container>
+            </ng-container>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-tab>
+  </ng-container>
+</mat-tab-group>

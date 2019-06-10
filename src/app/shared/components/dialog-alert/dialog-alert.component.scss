@@ -1,0 +1,31 @@
+@import "../../../../scss/variables.scss";
+
+.alert-bar {
+  width: 99.6vw;
+  height: 55px;
+  margin: 0 2px;
+  background: $dark;
+
+  &.success {
+    background-color: rgba(237, 255, 224, .9);
+    border: 1px solid $success-green;
+  }
+
+  &.error {
+    background-color: rgba(255, 224, 224, .9);
+    border: 1px solid $red;
+  }
+
+  &.warning {
+    background-color: rgba(255, 241, 211, .9);
+    border: 1px solid $orange;
+  }
+
+  p {
+    color: $black;
+    font-weight: 600;
+    background: transparent;
+    letter-spacing: .5px;
+    margin-left:5%;
+  }
+}

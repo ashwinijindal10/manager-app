@@ -1,0 +1,15 @@
+<div class="add-popup" fxLayout="column" fxFlex="">
+  <p fxLayout="row" fxFlex="100" class="max-hgt">
+    <span fxFlex="80" class="drks fontsize-18">{{ noteTitle }} </span>
+    <app-save-cancel fxFlex="20" (editted)="edit($event)" class="align-right"></app-save-cancel>
+  </p>
+  <p class="drks fontsize-12">
+    {{ noteSubTitle }}
+  </p>
+  <textarea class="txtarea" aria-label="Text Area" placeholder="Start writing..." #notes [(ngModel)]="note"
+    maxlength="4000"></textarea>
+  <p fxLayout="row">
+    <span class="fontsize-12 medium2" fxFlex="74">Character Limit : 4,000</span><span
+      class="fontsize-12 align-right medium2" fxFlex="26">{{ notes.value.length | number: '' }}/4,000</span>
+  </p>
+</div>

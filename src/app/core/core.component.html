@@ -1,0 +1,26 @@
+<app-spinner></app-spinner>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav class="sidenav" mode="side" opened="true">
+    <app-sidenav></app-sidenav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-header></app-header>
+    <!-- Add Content Here -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<div>
+  <app-email-editor-manager></app-email-editor-manager>
+</div>
+<!-- <header fxLayout="row">
+  <app-header></app-header>
+</header>
+<div>
+  <div fxFlex="10"><app-sidenav></app-sidenav></div>
+  <div class="body" fxFlex="90"><router-outlet></router-outlet>
+  <footer class="flex-container" fxLayout="row" style="position: fixed; bottom: 0; width: 100%; background-color: #f1f1f1;">
+    <app-footer></app-footer>
+  </footer>
+  </div>
+</div> -->

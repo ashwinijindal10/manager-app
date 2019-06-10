@@ -1,0 +1,72 @@
+@import "../../../../scss/variables.scss";
+
+.card-section-zoom {
+  border: 2px solid $medium;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .24), 0 0 2px rgba(0, 0, 0, .12);
+
+  &.template-popup{
+    max-height: -webkit-fill-available;
+    .mat-card-content{
+      margin: 25px 0;
+    }
+  }
+
+  &.mat-card {
+    padding: 25px;
+  }
+  .img-content{
+    overflow: hidden;
+    overflow-y: auto;
+    border: 1px solid $lite;
+  }
+
+  button {
+    font-family: $font-stack;
+
+    &.btn-edit {
+      margin: 0 10px 0 0;
+    }
+  }
+
+  .mat-card-image {
+    &:first-child {
+      margin: 0;
+      border-radius: 4px;
+    }
+
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    height: auto;
+    //border: 1px solid $lite;
+  }
+
+  .mat-card-content {
+    margin: 25px 0 35px;
+    border: 1px solid $lite;
+    padding: 10px;
+    border-radius: 4px;
+
+    h6 {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 12px;
+      margin: 0 0 5px;
+    }
+  }
+
+  .mat-badge-medium {
+    .mat-badge-content {
+      background-color: $dark-blue;
+    }
+
+    &.mat-badge-overlap.mat-badge-after .mat-badge-content {
+      right: 0;
+      top: 10px;
+      font-weight: 100;
+    }
+  }
+}

@@ -1,0 +1,153 @@
+<div class="row" fxFlex="100" class="s-container">
+  <mat-tab-group fxFlex="100" animationDuration="0ms" class="" [(selectedIndex)]="selectedTabIndex"
+    (selectedTabChange)="onTabChange($event)">
+    <mat-tab [disabled]="!isProspectType">
+      <ng-template matTabLabel>
+        <span>Current</span>
+      </ng-template>
+      <ng-container *ngIf="isProspectType">
+        <div fxLayout="column" fxFlex="100%" class="icons-row current_tab current-query-builder">
+          <p class="basic_details">Basic Details</p>
+          <form fxLayout="column" flFlex="100">
+            <ng-container *ngFor="let indexField of indexFields; let i = index">
+              <p class="basic_details" *ngIf="i === indexFields.length - 1">Location</p>
+              <div fxFlex="100" class="flex-basis" fxLayoutAlign="none" fxLayout="row">
+                <div fxFlex="45" fxLayout="row">
+                  <mat-form-field [ngClass]="indexField.isLeftValueDisabled ? 'mb-10 wid100 fade-out' : 'mb-10 wid100'">
+                    <input #queryBuilderSearch matInput
+                      [formControl]="currentSearchDetails.controls[indexField.leftIndex]" [matAutocomplete]="auto"
+                      (input)="showSuggestions($event, indexField.leftValue)"
+                      (focus)="insertColon(indexField.leftIndex)" (blur)="removeTrailingColon(indexField.leftIndex)"
+                      [placeholder]="indexField.leftValue">
+                    <mat-autocomplete #auto="matAutocomplete"
+                      (optionSelected)="selectInForm($event,indexField.leftIndex, indexField.leftValue)">
+                      <mat-option *ngIf="isLoading" class="is-loading">
+                        <mat-spinner diameter="50"></mat-spinner>
+                      </mat-option>
+                      <ng-container *ngIf="!isLoading">
+                        <mat-option *ngFor="let option of searchOptions" [value]="option">
+                          {{option}}
+                        </mat-option>
+                      </ng-container>
+                    </mat-autocomplete>
+                    <mat-error>
+                      <span
+                        *ngIf="currentSearchDetails.controls[indexField.leftIndex]?.errors?.isError">{{currentSearchDetails.controls[indexField.leftIndex]?.errors?.message}}</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div fxFlex="10">&nbsp;</div>
+                <div fxFlex="45" fxLayout="row"
+                  [ngClass]="indexField.rightValue === 'None' ? 'query-builder-input' : ''">
+                  <mat-form-field [ngClass]="indexField.isRightValueDisabled ? 'mb-10 wid100 fade-out' : 'mb-10 wid100'"
+                    *ngIf="indexField.rightValue">
+                    <input #queryBuilderSearch matInput
+                      [formControl]="currentSearchDetails.controls[indexField.rightIndex]" [matAutocomplete]="auto"
+                      (input)="showSuggestions($event, indexField.rightValue)"
+                      (focus)="insertColon(indexField.rightIndex)" (blur)="removeTrailingColon(indexField.rightIndex)"
+                      [placeholder]="indexField.rightValue">
+                    <mat-autocomplete #auto="matAutocomplete"
+                      (optionSelected)="selectInForm($event, indexField.rightIndex, indexField.rightValue)">
+                      <mat-option *ngIf="isLoading" class="is-loading">
+                        <mat-spinner diameter="50"></mat-spinner>
+                      </mat-option>
+                      <ng-container *ngIf="!isLoading">
+                        <mat-option *ngFor="let option of searchOptions" [value]="option">
+                          {{option}}
+                        </mat-option>
+                      </ng-container>
+                    </mat-autocomplete>
+                    <mat-error>
+                      <span
+                        *ngIf="currentSearchDetails.controls[indexField.rightIndex]?.errors?.isError">{{currentSearchDetails.controls[indexField.rightIndex]?.errors?.message}}</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </ng-container>
+          </form>
+          <div fxLayoutAlign="end start">
+            <button mat-raised-button class="prospect-button" (click)="ClosePopup()">CANCEL</button>
+            <button mat-raised-button class="prospect-button" (click)="resetDatainForm()">RESET</button>
+            <button mat-raised-button [disabled]="isApplyButtonDisabled"
+              [ngClass]="isApplyButtonDisabled ? 'fade-out' : 'prospect-button bg-blue'"
+              (click)="submitFormData()">APPLY</button>
+          </div>
+        </div>
+      </ng-container>
+    </mat-tab>
+    <mat-tab>
+      <ng-template matTabLabel>
+        <span>Saved Search</span>
+      </ng-template>
+      <div fxLayout="column" fxFlex="100%" class="icons-row align-table">
+        <div class="is-save-loading" *ngIf="isSaveLoading">
+          <mat-spinner diameter="80"></mat-spinner>
+        </div>
+        <ng-container *ngIf="!isSaveLoading">
+          <ng-container *ngIf="!checkIfDataAvailable">
+            <div fxflex="100" fxLayoutAlign="center center">
+              <h3>No entries available!!</h3>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="checkIfDataAvailable">
+            <div class="align-table">
+              <mat-table [dataSource]="userSearches" fxFlex="100"
+                class="mat-elevation-z8 job-details-table cursor mb-2em flex-basis">
+                <ng-container matColumnDef="select">
+                  <th fxFlex="10" fxLayoutAlign="start center" mat-header-cell *matHeaderCellDef></th>
+                  <td fxFlex="10" fxLayoutAlign="start center" mat-cell *matCellDef="let element">
+                    <mat-radio-group name="userSavedSearch" (change)="selectSearch($event)"
+                      aria-label="Select an option">
+                      <mat-radio-button [value]="element.searchRequestId"></mat-radio-button>
+                    </mat-radio-group>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="searchName">
+                  <th fxFlex="40" fxLayoutAlign="start center" class="fontsize-12 dark" mat-header-cell
+                    *matHeaderCellDef>
+                    QUERY NAME </th>
+                  <td fxFlex="40" fxLayoutAlign="start center" mat-cell *matCellDef="let element">
+                    {{element.searchName}}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="createdOn">
+                  <th fxFlex="40" fxLayoutAlign="start center" class="fontsize-12 dark" mat-header-cell
+                    *matHeaderCellDef>
+                    DATE SAVED </th>
+                  <td fxFlex="40" fxLayoutAlign="start center" mat-cell *matCellDef="let element">
+                    {{element.createdOn  | date: 'MM/dd/yyyy'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="delete">
+                  <th fxFlex="10" fxLayoutAlign="start center" mat-header-cell *matHeaderCellDef></th>
+                  <td fxFlex="10" fxLayoutAlign="start center" mat-cell *matCellDef="let element">
+                    <mat-icon svgIcon="delete"
+                      [ngClass]="element.searchRequestId !== currentSelectedSearch  ? 'fade-out' : ''"
+                      (click)="deleteSavedSearch()"></mat-icon>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </mat-table>
+            </div>
+          </ng-container>
+          <div fxLayoutAlign="end start" class="mt-20">
+            <button mat-raised-button class="prospect-button" (click)="ClosePopup()">CLOSE</button>
+            <button mat-raised-button [disabled]="checkSelectionStatus"
+              [ngClass]="checkSelectionStatus  ? 'fade-out' : 'prospect-button bg-blue'"
+              (click)="applySearch()">APPLY</button>
+          </div>
+        </ng-container>
+      </div>
+    </mat-tab>
+    <mat-tab class="hidden" disabled>
+      <ng-template matTabLabel>
+        <span>&nbsp;</span>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>

@@ -1,0 +1,48 @@
+<div class="vertical-flow">
+  <div *ngIf="noteDetails.activityType == 'Jobs'" class="profile-comment-list">
+    <div fxLayout="row">
+      <p fxFlex="75" class="dark m-0 fontsize-14" fxLayoutAlign="start center">
+        <mat-icon svgIcon="addnote" class="icon-16"></mat-icon> Note added by
+        <span *ngIf="userEmail !== noteDetails.createdBy" class="blue">{{
+          noteDetails.createdBy
+        }}</span>
+        <span *ngIf="userEmail === noteDetails.createdBy" class="blue">&nbsp;me</span>
+      </p>
+      <p fxFlex="25" fxLayoutAlign="end center" class="fontsize-12 m-0 dark">
+        {{ noteDetails.modifiedOn | date: 'MM/dd/yyyy hh:mm a' }}
+      </p>
+    </div>
+    <div class="b-left mat-outer mt-10" fxLayout="column" fxLayoutAlign="none">
+      <mat-card fxLayout="row" [ngClass]="userEmail === noteDetails.createdBy ? 'parentBG' : 'parent'">
+        <p fxFlex="95" class="m-0 dark fontsize-14" [innerHTML]="noteDetails.logMessage | linkify"></p>
+        <span fxFlex="4" fxLayoutAlign="end center" *ngIf="userEmail !== noteDetails.createdBy">
+          <mat-icon svgIcon="addnote" (click)="addComment()" class="icon-dark cursor icon-16"></mat-icon>
+        </span>
+        <mat-icon fxFlex="5" *ngIf="userEmail === noteDetails.createdBy" svgIcon="more_v"
+          class="cursor icon-dark icon-16" [matMenuTriggerFor]="menu"></mat-icon>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="addComment()">
+            Add Comment
+          </button>
+          <button mat-menu-item (click)="editNote()">Edit Note</button>
+          <button mat-menu-item (click)="deleteNote(noteDetails.activityId)">
+            Delete Note
+          </button>
+        </mat-menu>
+
+        <div *ngIf="showComments" class="addNotes-popup">
+          <app-activity-note-details-comments-dialog [noteTitle]="noteTitle" [notecomments]="notecomments"
+            (comment)="activityComment($event)">
+          </app-activity-note-details-comments-dialog>
+        </div>
+      </mat-card>
+      <ng-container *ngIf="showChild">
+        <div *ngIf="noteDetails.comments && showChild">
+          <div *ngFor="let obj of noteDetails.comments">
+            <app-activity-note-details-comments [data]="obj"></app-activity-note-details-comments>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

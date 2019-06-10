@@ -1,0 +1,14 @@
+<div class="background-overlay">
+  <div class="popup-inner" fxLayout="column">
+    <div class="close-icon cursor" fxLayoutAlign="end center">
+      <mat-icon fxFlex="5" matTooltip="close" svgIcon="close" (click)="onNo()"></mat-icon>
+    </div>
+    <div fxLayout="column" fxFlexAlign="start center">
+      <p class="dark m-0 mb-15 pr-24">Your changes will be lost. Do you want to proceed?</p>
+    </div>
+    <div fxLayoutAlign="end center">
+      <button class="m-0 nav-btn" mat-stroked-button (click)="onNo()">No</button>
+      <button class="m-0 nav-btn" mat-flat-button (click)="onYes()" >Yes</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,109 @@
+@import "../../../../scss/variables.scss";
+
+.map-field-popup .mat-dialog-container{
+  padding: 0 !important;
+  .card-section-zoom.template-popup{
+    height: auto;
+  }
+}
+.card-section-zoom {  
+  .mat-card-content {
+    margin: 25px 0 15px;
+  }
+}
+.border-template {
+  width: 100%;
+  border-top: 1px solid $lite-grey;
+}
+.campaign-title-wrapper {
+  padding: 1em;
+  font-family: $font-stack;
+  h2{
+    padding: 0 !important;
+  }
+  .template-bg {
+    padding: 2em 3em;
+    margin: 1em 0;
+  }
+}
+
+  .mat-select {
+    font-family: $font-stack;
+    line-height: 2.125;
+    font-size: 14px;
+  }
+
+  .template-bg {
+    background: $white;
+    border-radius: 5px;
+
+    .mat-flat-button {
+      margin: 10px;
+    }
+
+    
+
+    p {
+      margin: 0;
+      color: $black;
+    }
+
+    .left-content {
+      max-width: 600px;
+      min-width: 600px;
+      border-style: dashed;
+      border: 2px solid $primary-color;
+      border-style: dashed;
+
+      .tiny-content-section {
+        margin: 25px;
+        box-shadow: 0 5px 20px 0 $dark-grey, 0 1px 5px 0 $dark-grey, 0 1px 5px 0 $dark-grey;
+
+        h3 {
+          font-size: 14px;
+          font-weight: 600;
+          line-height: 24px;
+        }
+
+        .mat-card {
+          margin: 25px;
+          border: 1px solid $border-color;
+          box-shadow: none;
+          padding: 10px;
+          &.card-img{
+            padding: 0;
+            .mat-card-content {
+              padding: 10px;
+            }
+          }
+        }
+
+        .mat-badge-content {
+          right: 10px;
+          top: 10px;
+          background-color: $dark-blue;
+          font-weight: 100;
+        }
+      }
+    }
+
+    .right-content {
+      .mat-form-field-wrapper {
+        width: 100%;
+      }
+    }
+  }
+
+.mat-select-panel .mat-option {
+  background: $white;
+  color: $black;
+  text-align: left;
+
+  &:hover {
+    background-color: $primary-color;
+    color: $white;
+  }
+}
+.edit-template .mat-form-field-wrapper{
+  width: 100%;
+}

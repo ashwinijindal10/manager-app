@@ -1,0 +1,81 @@
+<div fxLayout="row" fxFlex="100" [ngClass]="savedSearch ? 'top-search filter-search' : 'top-search'">
+  <div fxLayout="row" fxFlex="100" class="main-search">
+    <form fxFlex="15" class="search-form brd-rgt cursor">
+      <mat-form-field class="search-full-width fade-out">
+        <input type="text" placeholder="All" aria-label="Assignee" matInput [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <!-- [displayWith]="displayFn" -->
+          <mat-option>
+            <!-- {{option.name}} -->
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-icon svgIcon="chevrondown down-arrows" class="cursor"></mat-icon>
+    </form>
+    <div fxFlex="81" class="prospect-search search-box brd-rgt cursor" fxLayout="row">
+      <span class="search-arrow-left" fxLayoutAlign="center center">
+        <mat-icon *ngIf="ShowArrows" svgIcon="chevronleft" class="medium" (click)="scrollLeft()"></mat-icon>
+      </span>
+      <mat-form-field [floatLabel]="'never'" (click)="resetScroll()" class="search-full-width pl-10" fxFlex="90">
+        <mat-chip-list #chipList>
+          <div class="wrapper">
+            <mat-chip *ngFor="let searchResult of searchResults"
+              matTooltip="{{searchResult.fieldName}} : {{searchResult.display}}" [selectable]="selectable"
+              [removable]="removable" (removed)="remove(searchResult)">
+              {{searchResult.fieldName}} : {{searchResult.display}}
+              <mat-icon matChipRemove *ngIf="removable" matTooltip="close" svgIcon="close"></mat-icon>
+            </mat-chip>
+            <input #searchInput (blur)="showError()" (keyup.enter)="searchData($event)"
+              [matAutocomplete]="searchAutoComplete" #autoCompleteTrigger="matAutocompleteTrigger"
+              [placeholder]="isProspectType ? 'Search Candidates' : 'Search Jobs'" [matChipInputFor]="chipList"
+              (input)="onSearchChange($event)">
+          </div>
+        </mat-chip-list>
+        <mat-autocomplete #searchAutoComplete="matAutocomplete" (optionSelected)="selected($event)"
+          [ngClass]="{'preventClick':isLoading}">
+          <mat-option *ngIf="isLoading" class="is-loading">
+            <mat-spinner diameter="50"></mat-spinner>
+          </mat-option>
+          <ng-container *ngIf="!isLoading">
+            <mat-option (click)="searchData($event)" *ngFor="let searchOption of searchOptions" [value]="searchOption">
+              {{searchOption}}
+            </mat-option>
+          </ng-container>
+        </mat-autocomplete>
+      </mat-form-field>
+      <span class="search-arrow-right" fxLayoutAlign="center" *ngIf="ShowArrows">
+        <mat-icon svgIcon="chevronright" class="medium mr-0" (click)="scrollRight()"></mat-icon>
+        <mat-icon matTooltip="close" svgIcon="close" class="medium" (click)="clearSearch()"></mat-icon>
+      </span>
+    </div>
+    <div class="" fxLayoutAlign="end center">
+      <p class="filter-bg relative blue-bg flex-basis" *ngIf="showSaveIcon" (click)="saveDialog()">
+        <mat-icon svgIcon="floppy" matTooltip="Save" class="search_filter_icon icon-blue ">
+        </mat-icon>
+      </p>
+      <p class="filter-bg relative blue-bg flex-basis" (click)="showdiv()">
+        <mat-icon svgIcon="filter" matTooltip="Filter" class="search_filter_icon icon-blue"></mat-icon>
+      </p>
+      <p [ngClass]="error?.isError || isSearchIconDisabled ? 'disable-search flex-basis'  : 'blue-bg active flex-basis'"
+        (click)="search()">
+        <mat-icon svgIcon="search" matTooltip="Search" class="search_filter_icon icon-blue"></mat-icon>
+      </p>
+    </div>
+  </div>
+
+  <div class="savedSearch" *ngIf="savedSearch" fxLayout="column">
+    <div class="header_section" fxLayout="row" fxFlex="100">
+      <h2 fxFlex="98">Search Criteria</h2>
+      <mat-icon matTooltip="close" svgIcon="close" fxFlex="2" fxLayoutAlign="end end" class="cursor" (click)="closeDiv()"></mat-icon>
+    </div>
+    <div fxFlex="100" class="flex-basis">
+      <app-query-builder fxFlex="100" (closePopup)="closeDiv()" (submitForm)="fillSearch($event)" [type]="type"
+        [searchIndexFields]="searchIndexFields" [searchResults]="searchResults">
+      </app-query-builder>
+    </div>
+  </div>
+</div>
+
+<div class="show-prospect-search-error" *ngIf="error.isError">
+  <mat-error>{{error.message}}</mat-error>
+</div>

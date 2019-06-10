@@ -1,0 +1,15 @@
+.create-emaillist{
+    position: fixed;
+    bottom: 0;
+    z-index: 999;
+    width: 0;
+    right: 0;
+    align-items: flex-end;
+    &-inner{
+        position: relative;
+        // float: right;
+        min-height: 35px;
+        // margin-left: 1.33%;
+    }
+    
+}

@@ -1,0 +1,22 @@
+@import '../../../../scss/variables.scss';
+.detailMessage {
+  padding: 24px 0;
+  .detailMessage-subject {
+    padding: 24px;
+  }
+
+  .detailMessage-fromTo {
+    padding: 12px 24px;
+    margin-bottom: 24px;
+    background: $body-color;
+    p {
+      line-height: 26px;
+    }
+  }
+ .detailMessage-body {
+  padding: 0 24px 24px;
+  }
+  .back-icon {
+    padding: 0 24px;
+  }
+}

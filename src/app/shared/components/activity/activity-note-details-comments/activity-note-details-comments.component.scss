@@ -1,0 +1,36 @@
+.child {
+  background: none !important;
+  margin-left: 50px;
+}
+
+.childBg {
+  background: #f1f1f1;
+  border: 1px solid #dce0e5;
+  margin-left: 50px;
+  .mat-icon {
+    margin-right:7px;
+  }
+}
+.addNotes-popup {
+  position: absolute;
+  width: 420px;
+  background: #fff;
+  right: 0;
+  border: solid 1px #ccc;
+  z-index: 9;
+}
+.self-comment {
+  padding: 0;
+  min-width: 30px;
+  line-height: 0;
+  position: relative;
+  text-align: right;
+}
+.profile-view {
+  text-align: right;
+  padding: 0 20px 10px;
+  font-size: 14px;
+}
+.more-p {
+  padding-right: 27px;
+}

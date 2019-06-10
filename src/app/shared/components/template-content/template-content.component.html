@@ -1,0 +1,61 @@
+<div class="card-section" *ngIf="showCreate" (click)="createTemplate()">
+  <mat-card fxFlex="100%" fxLayout="column" fxLayoutAlign="center center" class="cursor-pointer">
+    <div class="create-new-template">
+      <mat-icon class="add-circle">add_circle</mat-icon>
+      <p>Create New Template</p>
+    </div>
+  </mat-card>
+</div>
+<div *ngIf="!showCreate">
+  <div class="card-section" *ngIf="disableSelection; else TemplateWithSelection;">
+    <mat-card fxFlex="100%" fxLayout="column">
+      <mat-icon *ngIf="template.bookmarked" class="bookmark" svgIcon="bookmark"></mat-icon>
+      <p *ngIf="template.type === 'Branded'" class="bevealed-text">Branded CX</p>
+      <div class="img-content">
+        <img *ngIf="template?.htmlThumbnail" mat-card-image [src]="template?.htmlThumbnail" alt="Template design">
+      </div>
+      <mat-card-content>
+        <p matBadge="{{template?.category}}" matBadgePosition="after" aria-label="Template Label">
+          <b>{{template?.name}}</b></p>
+        <p>Created by {{template?.createdBy}}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <ng-template #TemplateWithSelection>
+    <div *ngIf="template" class="card-section" [mdePopoverTriggerFor]="templatePopover" mdePopoverTriggerOn="click">
+      <mat-card fxFlex="100%" fxLayout="column" class="cursor-pointer">
+        <mat-icon *ngIf="template.bookmarked" class="bookmark" svgIcon="bookmark"></mat-icon>
+        <p *ngIf="template.type === 'Branded'" class="bevealed-text">Branded CX</p>
+        <div fxFlex="100" fxLayout="row" class="img-content">
+          <!-- <img mat-card-image [src]="template?.htmlContent" alt="Template design"> -->
+          <img *ngIf="template?.htmlThumbnail" mat-card-image [src]="template?.htmlThumbnail" alt="Template design">
+        </div>
+        <mat-card-content>
+          <p matBadge="{{template?.category}}" matBadgePosition="after" aria-label="Template Label">
+            <b>{{template?.name}}</b></p>
+          <p>Created by {{template?.createdBy}}</p>
+        </mat-card-content>
+      </mat-card>
+      <mde-popover #templatePopover="mdePopover" [mdePopoverOverlapTrigger]="true" [mdePopoverCloseOnClick]="false">
+        <div *ngIf="popover" class="card-section-zoom">
+          <mat-card fxFlex="100%" fxLayout="column">
+            <p *ngIf="template.type === 'Branded'" class="bevealed-text">Branded CX</p>
+            <div fxFlex="100" fxLayout="row" class="img-content">
+              <!-- <img mat-card-image [src]="template?.htmlContent" alt="Template design"> -->
+              <img *ngIf="template?.htmlThumbnail" mat-card-image [src]="template?.htmlThumbnail" alt="Template design">
+            </div>
+            <mat-card-content>
+              <p matBadge="{{template?.category}}" matBadgePosition="after" aria-label="Template Label">
+                <b>{{template?.name}}</b></p>
+              <p>Created by {{template?.createdBy}}</p>
+            </mat-card-content>
+            <div *ngIf="template.type !== 'Branded' || actionText === 'USE'" class="btn-row" fxLayout="column"
+              fxFlex="10%" fxLayoutAlign="end end">
+              <button type="button" mat-flat-button (click)="performAction()">{{actionText}}</button>
+            </div>
+          </mat-card>
+        </div>
+      </mde-popover>
+    </div>
+  </ng-template>
+</div>

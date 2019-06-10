@@ -1,0 +1,36 @@
+@import '../../../../../scss/mixins.scss';
+@import '../../../../../scss/variables.scss';
+
+.vertical-flow .mat-card {
+  margin: 5px 0 0 20px;
+  background: $body-color;
+  border: 1px solid $border-color;
+  box-shadow: none;
+  padding: 0 !important;
+  border-radius: 0;
+  padding: 14px !important;
+
+  &.parent-call {
+    background: none;
+    box-shadow: none;
+  }
+  &.parentBG {
+    background: none !important;
+    border: 1px solid $border-color;
+  }
+}
+
+.addNotes-popup {
+  position: absolute;
+  width: 420px;
+  background: #fff;
+  right: 0;
+  border: solid 1px #ccc;
+  z-index: 9;
+}
+
+.profile-comment-list {
+  p {
+    word-break: break-all;
+  }
+}

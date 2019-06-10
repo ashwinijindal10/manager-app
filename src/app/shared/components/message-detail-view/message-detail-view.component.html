@@ -1,0 +1,28 @@
+<div fxLayout="column" class="detailMessage">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-icon (click)="backToList()" svgIcon="back" class="icon-blue back-icon"></mat-icon>
+    <div fxLayout="row">
+      <!-- <mat-icon svgIcon="chevronleft" class="icon-dark icon-20 pr-20"></mat-icon>
+      <mat-icon svgIcon="chevronright" class="icon-dark icon-20"></mat-icon> -->
+    </div>
+  </div>
+  <div *ngIf="sentData">
+    <div fxLayout="column" class="detailMessage-subject">
+      <h5 class="m-0">{{sentData.subject}}</h5>
+      <p class="m-0 fontsize-12 medium">{{sentData.createdOn | date:'MM/dd/yyyy HH:mm a'}}</p>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="detailMessage-fromTo">
+      <div fxLayout="column">
+        <p class="m-0 fontsize-14 dark"><b>Me</b></p>
+        <p class="m-0 fontsize-14 dark">To&nbsp;&nbsp;<b>{{sentData.receipients.toString()}}</b></p>
+      </div>
+      <mat-icon (click)="replyData(sentData)" svgIcon="reply" class="icon-dark icon-20"></mat-icon>
+    </div>
+    <div class="detailMessage-body">
+      <p class="m-0 fontsize-14 dark" [innerHTML]="sentData.body">
+      </p><br /><br />
+
+    </div>
+  </div>
+
+</div>

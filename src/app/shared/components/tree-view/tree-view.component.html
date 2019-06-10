@@ -1,0 +1,66 @@
+<div class="tree-layer">
+  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    <!-- <mat-tree-node class="pl-10 parent-tree" *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+      <button mat-icon-button matTreeNodeToggle>
+  <mat-icon  class="mat-icon-rtl-mirror icon-20 blue mr-30 mt-7"></mat-icon>
+</button>
+<span (click)="viewMessage(node)">{{node.item}} {{node.expandable}} hjkjjj</span>
+<div *ngIf="node.id">
+  <button mat-icon-button  (click)="addNewMessage(node)"><mat-icon class="add">add</mat-icon></button>
+  <button mat-icon-button>
+    <mat-icon svgIcon="erase" class="add"></mat-icon>
+  </button>
+</div>                            
+  </mat-tree-node>
+ 
+  <mat-tree-node  class="pl-10 hover-tree" *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+    <div  class="displayIcon" fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center">
+      <div>
+        <button mat-icon-button matTreeNodeToggle *ngIf="node.expandable"
+            [attr.aria-label]="'toggle ' + node.filename">
+        <mat-icon svgIcon="{{treeControl.isExpanded(node) ? 'down-arrow' : 'right-arrow'}}" class="mat-icon-rtl-mirror icon-20 blue mr-30 mt-7"></mat-icon>
+      </button>
+      <span (click)="viewMessage(node)">{{node.item}} {{node.expandable}}</span>
+      </div>
+    <div>
+      <button mat-icon-button  (click)="addNewMessage(node)"><mat-icon class="add">add</mat-icon></button>
+      <button mat-icon-button>
+        <mat-icon svgIcon="erase" class="add"></mat-icon>
+      </button>
+      
+    </div>
+    </div>
+  </mat-tree-node> -->
+
+
+
+
+    <mat-tree-node [ngClass]="{'displayColor': !node.id || node.id === selectedNode, 'bt': node.level === 1}"
+      class="pl-10 hover-tree" *matTreeNodeDef="let node" matTreeNodePadding>
+      <div class="displayIcon" [style.width.px]="treeViewWidth">
+        <div class="text-ellip1">
+          <button mat-icon-button matTreeNodeToggle *ngIf="node.expandable"
+            [attr.aria-label]="'toggle ' + node.filename">
+            <mat-icon svgIcon="{{treeControl.isExpanded(node) ? 'down-arrow' : 'right-arrow'}}"
+              class="mat-icon-rtl-mirror "></mat-icon>
+          </button>
+          <button mat-icon-button matTreeNodeToggle *ngIf="!node.expandable"
+            [attr.aria-label]="'toggle ' + node.filename">
+            <mat-icon></mat-icon>
+          </button>
+          <span [appCustomTooltip]="node.item" matTooltipClass="tooltip-text" (click)="viewMessage(node)"
+            class="text-ellip tree-node-text cursor">{{node.item}}</span>
+        </div>
+
+        <div class="icon-show" *ngIf="node.id && !hideButton" [class.alwaysDisplay]="node.id === selectedNode">
+          <button mat-icon-button>
+            <mat-icon class="add blue" svgIcon="add" matTooltip="Add" (click)="addNewMessage(node)"></mat-icon>
+          </button>
+          <button mat-icon-button>
+            <mat-icon class="add blue" svgIcon="erase" matTooltip="Delete" (click)="deleteMessage(node)"></mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-tree-node>
+  </mat-tree>
+</div>
