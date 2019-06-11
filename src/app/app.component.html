@@ -1,23 +1,63 @@
 <mat-toolbar color="primary">
   <h1>{{title }}</h1>
+  <button mat-button [matMenuTriggerFor]="menu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item class="menu-button">Log out</button>
+  </mat-menu>
 </mat-toolbar>
 <mat-sidenav-container>
-  <mat-sidenav mode="side" opened role="region">Sidenav content</mat-sidenav>
+  <mat-sidenav mode="side" opened role="region">
+    <mat-form-field class="search">
+      <input matInput placeholder="Search items">
+    </mat-form-field>
+    <mat-divider></mat-divider>
+    <ng-container *ngFor="let filter of filters | async; last as last">
+      <mat-list>
+        <h3 matSubheader>{{ filter.displayName }}</h3>
+        
+        <ng-container *ngIf="filterState[filter.category] === ''; else chip">
+          <mat-list-item *ngFor="let val of filter.options">
+            <button mat-button class="list-button" (click)="changeFilter(filter.category, val)">
+              {{ val }}
+            </button>
+          </mat-list-item>
+        </ng-container>
+        <ng-template #chip>
+          <mat-chip-list>
+            <ng-container *ngFor="let val of filter.options">
+              <mat-chip *ngIf="filterState[filter.category] === val" (removed)="changeFilter(filter.category, '')">
+                {{val}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+              </mat-chip>
+            </ng-container>
+          </mat-chip-list>
+        </ng-template>
+
+
+      </mat-list>
+      <mat-divider *ngIf="!last"></mat-divider>
+    </ng-container>
+  </mat-sidenav>
+
   <mat-sidenav-content role="region">
     <mat-card *ngFor="let item of items | async">
-      <mat-card-title>{{astronaut.title}}</mat-card-title>
-      <img mat-card-image [src]="astronaut.picture">
+      <mat-card-title>{{item.title}}</mat-card-title>
+      <img mat-card-image [src]="item.picture">
       <mat-card-content>
         <dl>
           <dt class="mat-small">Name</dt>
-          <dd class="mat-body-2">{{ astronaut.title }}</dd>
-          <dt class="mat-small">Space walks</dt>
-          <dd class="mat-body-2">{{ astronaut.spaceWalks }}</dd>
-          <dt class="mat-small">Undergraduate major</dt>
-          <dd class="mat-body-2">{{ astronaut.undergraduateMajor }}</dd>
+          <dd class="mat-body-2">{{ item.title }}</dd>
+          <dt class="mat-small">Qunatity</dt>
+          <dd class="mat-body-2">{{ item.quantity }}</dd>
+          <dt class="mat-small">Describtion</dt>
+          <dd class="mat-body-2">{{ item.details|slice:1:12 }} ...</dd>
         </dl>
       </mat-card-content>
     </mat-card>
+    <button (click)="addItem()" mat-fab aria-label="Add an item"><mat-icon>add</mat-icon></button>
   </mat-sidenav-content>
+ 
 </mat-sidenav-container>
 <router-outlet></router-outlet>

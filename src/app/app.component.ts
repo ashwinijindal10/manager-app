@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ItemService } from './shared/services/item.service';
 import { Item, FilterState, Filter ,Option} from './shared/model/item';
 import { Observable } from 'rxjs';
+import { AddComponent } from './modules/item/add/add.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +16,7 @@ export class AppComponent {
   filterState: FilterState;
   filters: Observable<Filter[]>;
 
-  constructor(itemService: ItemService) {
+  constructor(itemService: ItemService,private dialog: MatDialog) {
     this.items = itemService.items;
     this.filterState = itemService.filterState;
     this.filters = itemService.filters;
@@ -22,5 +24,12 @@ export class AppComponent {
 
   changeFilter(category: string, option: Option) {
     this.filterState[category] = option;
+  }
+
+  addItem(){
+    this.dialog.open(AddComponent, {
+      width: '500px',
+      ariaLabel: 'Add an item'
+    });
   }
 }

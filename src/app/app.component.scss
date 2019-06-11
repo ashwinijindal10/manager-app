@@ -45,4 +45,47 @@
   dd {
     margin-inline-start: 0;
   }
+
+// side nav
+
+mat-sidenav {
+  width: 280px;
+}
+
+.search {
+  padding: 0 16px;
+}
+
+.list-button {
+  width: 100%;
+  text-align: left;
+}
+
+mat-chip.mat-chip {
+  margin: 0 16px 16px;
+}
+
+::ng-deep .mat-chip-list-wrapper {
+  margin: 0 !important;
+}
+
   
+
+// menu
+
+.menu-button {
+  grid-area: menu;
+}
+
+mat-menu {
+  display: none
+}
+
+//last 
+
+[mat-fab] {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  z-index: 10;
+}
