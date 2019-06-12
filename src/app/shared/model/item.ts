@@ -5,7 +5,8 @@ export interface Item {
     creation_date?:Date,
     details ?:string,
     picture ?:string,
-    category?:string
+    category?:string,
+    active?:boolean
   }
   export interface Filter {
     category: string;

@@ -11,32 +11,38 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./add.component.scss']
 })
 export class AddComponent  {
-  astronaut: FormGroup;
-  undergraduateMajors: Observable<Option[]>;
+  itemGorup: FormGroup;
+  categories: Observable<Option[]>;
 
   constructor(
     private dialogRef: MatDialogRef<AddComponent>,
     fb: FormBuilder,
-    astronautService: ItemService
+    itemService: ItemService
   ) {
-    this.astronaut = fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      middleInitial: ['', Validators.maxLength(1)],
+
+    this.itemGorup = fb.group({
+      title: ['', Validators.required],
+      quantity: ['', Validators.required],
       active: [true],
-      birthdate: ['', Validators.required],
-      undergraduateMajor: ['', Validators.required]
+      creation_date: ['', Validators.required],
+      category: ['', Validators.required],
+      details: [''],
     });
-    this.undergraduateMajors = astronautService.filters.pipe(
-      map(filters => filters.find(f => f.category === 'undergraduateMajor')),
+    this.categories = itemService.filters.pipe(
+      map(filters => filters.find(f => f.category === 'category')),
       map(filter => filter.options),
     );
   }
 
-  saveAstronaut() {
+  saveItem() {
     // Save to backend
-   
-    console.log(this.astronaut.value);
+    console.log(this.itemGorup.value);
     this.dialogRef.close();
   }
+
+  close(){
+    this.itemGorup.reset();
+    this.dialogRef.close();
+  }
+
 }

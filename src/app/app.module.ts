@@ -8,7 +8,8 @@ import { AddComponent } from './modules/item/add/add.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AddComponent
   ],
   imports: [
     BrowserModule,
