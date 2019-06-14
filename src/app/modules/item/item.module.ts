@@ -4,7 +4,7 @@ import { AddComponent } from './add/add.component';
 import { ListComponent } from './list/list.component';
 
 @NgModule({
-  declarations: [AddComponent, ListComponent],
+  declarations: [ ListComponent], //AddComponent
   imports: [
     CommonModule
   ]
