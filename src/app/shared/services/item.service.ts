@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
-import { Observable } from 'rxjs';
+import { Observable, ObservableLike } from 'rxjs';
 import { tap, map, share } from 'rxjs/operators';
 import { Item, FilterState, Filter ,Option} from '../model/item';
 import { HttpClient } from '@angular/common/http';
@@ -38,5 +38,17 @@ export class ItemService {
       .keys()
       .sort()
       .value();
+  }
+
+  public create(item:Item):Observable<Item>{
+      return null;
+  }
+
+  public delete(id:number):Observable<Item>{
+    return null;
+  }
+
+  public update(id:number,item:Item):Observable<Item>{
+    return null;
   }
 }
